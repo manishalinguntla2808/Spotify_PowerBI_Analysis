@@ -122,6 +122,11 @@ This visual provides raw-level exploration of:
 
 ## 🧮 DAX Measures & Their Purpose
 
+In Power BI, **measures** are DAX (Data Analysis Expressions) calculations that perform dynamic computations based on the user’s current filters and selections.  
+These measures power the calculations behind charts, KPIs, and interactive visuals in this dashboard.
+
+Below are the key measures used in this project, along with their purpose and usage.
+
 ### 1. Total Listening Minutes
 
 ```DAX
@@ -280,3 +285,56 @@ Track Freaquency (Parameter) Value = SELECTEDVALUE('Track Freaquency (Parameter)
 ```
 
 ---
+
+## 🎛 Dashboard Features
+
+The Power BI dashboard includes rich interactive features that improve user experience and data exploration:
+
+- **Year Filters**  
+  Allows users to filter the visuals by specific years to analyze trends over time.
+
+- **Platform Filters**  
+  Enables analysis based on listening platforms such as Android, iOS, or Web.
+
+- **Shuffle and Skipped Filters**  
+  Helps understand user behavior by filtering tracks that were shuffled or skipped.
+
+- **Cross-Visual Interactions**  
+  Selecting a data point in one visual dynamically highlights and filters related data in other visuals.
+
+- **Drill-through Reports**  
+  Users can right-click and drill through from summary visuals to detailed pages for deeper track-level insights.
+
+---
+
+## ⚙️ Report Parameters
+
+This dashboard uses **dynamic parameters** to give users more control over how the data is analyzed and visualized.
+
+### 1. Track Frequency (Parameter)
+
+This parameter allows users to control the **threshold for track play counts** used in the analysis.
+
+**What it does:**
+- Defines what is considered a **“high frequency”** track.
+- Used to dynamically adjust the **quadrants in the scatter plot**.
+- Helps users customize how strict or flexible the analysis should be.
+
+**Where it is used:**
+- Scatter chart (Track Engagement Analysis)
+- Dynamic quadrant segmentation
+
+---
+
+### 2. Listening Time (min) (Parameter)
+
+This parameter allows users to control the **listening time threshold (in minutes)** that determines engagement levels.
+
+**What it does:**
+- Defines what is considered **“long listening time”** vs short listening time.
+- Used to dynamically adjust the X-axis behavior in the scatter plot.
+- Helps users personalize engagement classification.
+
+**Where it is used:**
+- Scatter chart (Avg Listening Time vs Track Frequency)
+- Interactive threshold controls in the report
