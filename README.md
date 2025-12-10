@@ -52,7 +52,7 @@ DateTable[Date] → spotify_history[Date]
 
 ### 🔹 Main Overview – Albums, Artists & Tracks
 
-![Spotify Overview Dashboard](assets/spotify_overview.png)
+![Spotify Overview Dashboard](https://github.com/manishalinguntla2808/Spotify_PowerBI_Analysis/blob/main/Overview.png)
 
 **What this visual shows:**
 
@@ -77,7 +77,7 @@ This section provides a **high-level summary** of listening behavior:
 
 ### 🔹 Listening Hours vs Days (Heatmap)
 
-![Listening Heatmap](assets/spotify_heatmap.png)
+![Listening Heatmap](https://github.com/manishalinguntla2808/Spotify_PowerBI_Analysis/blob/main/Listening%20Times%20Heat%20Map.png)
 
 **What this visual does:**
 
@@ -94,7 +94,7 @@ This section provides a **high-level summary** of listening behavior:
 
 ### 🔹 Track Engagement Scatter Plot
 
-![Track Engagement Scatter](assets/spotify_scatter.png)
+![Track Engagement Scatter](https://github.com/manishalinguntla2808/Spotify_PowerBI_Analysis/blob/main/LIstening%20Times%20Scatter%20Plot.png)
 
 This visual analyzes **track-level engagement** based on frequency and depth of listening.
 
@@ -109,7 +109,7 @@ This visual analyzes **track-level engagement** based on frequency and depth of 
 
 ### 🔹 Detailed Track Table
 
-![Detailed Table](assets/spotify_table.png)
+![Detailed Table](https://github.com/manishalinguntla2808/Spotify_PowerBI_Analysis/blob/main/Details.png)
 
 This visual provides raw-level exploration of:
 
@@ -123,13 +123,14 @@ This visual provides raw-level exploration of:
 ## 🧮 DAX Measures & Their Purpose
 
 ### 1. Total Listening Minutes
+
 ```DAX
 Listening Time(min) Value = SELECTEDVALUE('Listening Time (min)'[Listening Time(min)])
-
+```
 ### 2. Avg Listening time
 ```DAX
 Avg Listening time = AVERAGE(spotify_history[ms_played])/ 60000
-
+```
 ### 3. CF Quadrant
 ```DAX
 CF Quadrant = 
@@ -144,32 +145,32 @@ VAR RESULT =
         AvgTime && NOT TrackFreq, 4 -- Low Time & Low Freq
     )
     RETURN RESULT
-
+```
 ### 4. LatestYearAlbums
 ```DAX
 LatestYearAlbums = 
 var _LatestYear = MAX('Date Table'[Year])
 RETURN
     CALCULATE(DISTINCTCOUNT(spotify_history[album_name]), 'Date Table'[Year] = _LatestYear)
-
+```
 ### 5. LatestYearArtists
 ```DAX
 LatestYearArtists = 
 var _LatestYear = MAX('Date Table'[Year])
 RETURN
     CALCULATE(DISTINCTCOUNT(spotify_history[artist_name]), 'Date Table'[Year] = _LatestYear)
-
+```
 ### 6. LatestYearTracks
 ```DAX
 LatestYearTracks = 
 var _LatestYear = MAX('Date Table'[Year])
 RETURN
     CALCULATE(DISTINCTCOUNT(spotify_history[track_name]), 'Date Table'[Year] = _LatestYear)
-
+```
 ### 7. Max Year
 ```DAX
 Max Year = MAX('Date Table'[Year])
-
+```
 ### 8. MinMax Albums Line Chart 
 ```DAX
 MinMax Albums Line Chart = 
@@ -178,7 +179,7 @@ var _MinValue = MINX(ALLSELECTED('Date Table'[Year]), CALCULATE(DISTINCTCOUNT(sp
 var _CurrentValue = DISTINCTCOUNT(spotify_history[album_name])
 RETURN
     IF(_CurrentValue = _MaxValue || _CurrentValue = _MinValue, _CurrentValue, BLANK())
-
+```
 ### 9. MinMax Artists Line Chart
 ```DAX
 MinMax Artists Line Chart = 
@@ -187,7 +188,7 @@ var _MinValue = MINX(ALLSELECTED('Date Table'[Year]), CALCULATE(DISTINCTCOUNT(sp
 var _CurrentValue = DISTINCTCOUNT(spotify_history[artist_name])
 RETURN
     IF(_CurrentValue = _MaxValue || _CurrentValue = _MinValue, _CurrentValue, BLANK())
-
+```
 ### 10. MinMax Tracks Line Chart
 ```DAX
 MinMax Tracks Line Chart = 
@@ -196,19 +197,19 @@ var _MinValue = MINX(ALLSELECTED('Date Table'[Year]), CALCULATE(DISTINCTCOUNT(sp
 var _CurrentValue = DISTINCTCOUNT(spotify_history[track_name])
 RETURN
     IF(_CurrentValue = _MaxValue || _CurrentValue = _MinValue, _CurrentValue, BLANK())
-
+```
 ### 11. No of Albums
 ```DAX
 No of Albums = DISTINCTCOUNT(spotify_history[album_name])
-
+```
 ### 12. No of Artists
 ```DAX
 No of Artists = DISTINCTCOUNT(spotify_history[artist_name])
-
+```
 ### 13. No of Tracks
 ```DAX
 No of Tracks = DISTINCTCOUNT(spotify_history[track_name])
-
+```
 ### 14. PreviousYearAlbums
 ```DAX
 PreviousYearAlbums = 
@@ -216,7 +217,7 @@ var _LatestYear = MAX('Date Table'[Year])
 var _PreviousYear = _LatestYear -1
 RETURN
     CALCULATE(DISTINCTCOUNT(spotify_history[album_name]), 'Date Table'[Year] = _PreviousYear)
-
+```
 ### 15. PreviousYearArtists
 ```DAX
 PreviousYearArtists = 
@@ -224,7 +225,7 @@ var _LatestYear = MAX('Date Table'[Year])
 var _PreviousYear = _LatestYear -1
 RETURN
     CALCULATE(DISTINCTCOUNT(spotify_history[artist_name]), 'Date Table'[Year] = _PreviousYear)
-
+```
 ### 16. PreviousYearTracks
 ```DAX
 PreviousYearTracks = 
@@ -232,7 +233,7 @@ var _LatestYear = MAX('Date Table'[Year])
 var _PreviousYear = _LatestYear -1
 RETURN
     CALCULATE(DISTINCTCOUNT(spotify_history[track_name]), 'Date Table'[Year] = _PreviousYear)
-
+```
 ### 17. PY and YoY Albums KPI
 ```DAX
 PY and YoY Albums KPI = 
@@ -244,7 +245,7 @@ RETURN
         "vs PY: " & FORMAT(_previous, "#,##0") & 
         " (" & FORMAT(_YoY, "0.00%") & ")",
         "No Data")
-
+```
 ### 18. PY and YoY Artists KPI
 ```DAX
 PY and YoY Artists KPI = 
@@ -256,7 +257,7 @@ RETURN
         "vs PY: " & FORMAT(_previous, "#,##0") & 
         " (" & FORMAT(_YoY, "0.00%") & ")",
         "No Data")
-
+```
 ### 19. PY and YoY Tracks KPI
 ```DAX
 PY and YoY Tracks KPI = 
@@ -268,11 +269,14 @@ RETURN
         "vs PY: " & FORMAT(_previous, "#,##0") & 
         " (" & FORMAT(_YoY, "0.00%") & ")",
         "No Data")
-
+```
 ### 20. Track Frequency
 ```DAX
 Track Frequency = COUNTROWS(spotify_history)
-
+```
 ### 21. Track Frequency (Parameter) Value
 ```DAX
 Track Freaquency (Parameter) Value = SELECTEDVALUE('Track Freaquency (Parameter)'[Track Freaquency (Parameter)])
+```
+
+---
